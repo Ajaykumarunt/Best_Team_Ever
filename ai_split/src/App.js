@@ -1,11 +1,13 @@
 import './App.css';
 import db from './firebase'
+import { Routes, Route } from 'react-router-dom';
+import SignupPage from './components/SignupPage'
 
 function App() {
   return (
-    <div className="App">
-     <h1 className='text-xl'>AI Split APP</h1>
-    </div>
+    <Routes>
+      <Route path="/signup" element={<SignupPage />} />
+    </Routes>
   );
 }
 
