@@ -1,12 +1,30 @@
 import './App.css';
-import db from './firebase'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useContext } from 'react';
 import SignupPage from './components/SignupPage'
+import HomePage from './components/HomePage';
+import LoginPage from './components/LoginPage';
+import { AuthContext } from './contexts/AuthContext';
 
 function App() {
+  const {currentUser} = useContext(AuthContext)
+
+  
+  const ProtectRoute = ({children}) =>{
+    return currentUser? children : <Navigate to="/login" />
+  }
+  console.log(currentUser)
   return (
     <Routes>
-      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/signup" element={
+        <SignupPage />
+      } />
+      <Route path="/" element={
+      <ProtectRoute>
+        <HomePage />
+      </ProtectRoute>
+      } />
+      <Route path="/login" element={<LoginPage />} />
     </Routes>
   );
 }
