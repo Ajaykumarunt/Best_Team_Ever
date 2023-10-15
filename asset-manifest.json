@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.7785a52d.css",
-    "main.js": "/static/js/main.a5dd1425.js",
-    "static/js/787.485a23bb.chunk.js": "/static/js/787.485a23bb.chunk.js",
-    "index.html": "/index.html",
-    "main.7785a52d.css.map": "/static/css/main.7785a52d.css.map",
-    "main.a5dd1425.js.map": "/static/js/main.a5dd1425.js.map",
-    "787.485a23bb.chunk.js.map": "/static/js/787.485a23bb.chunk.js.map"
+    "main.css": "/ai-split-app/static/css/main.7785a52d.css",
+    "main.js": "/ai-split-app/static/js/main.7f15dff0.js",
+    "static/js/787.485a23bb.chunk.js": "/ai-split-app/static/js/787.485a23bb.chunk.js",
+    "index.html": "/ai-split-app/index.html",
+    "main.7785a52d.css.map": "/ai-split-app/static/css/main.7785a52d.css.map",
+    "main.7f15dff0.js.map": "/ai-split-app/static/js/main.7f15dff0.js.map",
+    "787.485a23bb.chunk.js.map": "/ai-split-app/static/js/787.485a23bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7785a52d.css",
-    "static/js/main.a5dd1425.js"
+    "static/js/main.7f15dff0.js"
   ]
 }
