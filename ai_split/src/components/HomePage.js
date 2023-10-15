@@ -1,23 +1,9 @@
-import React from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
 
-function HomePage() {
-  const history = useNavigate();
-  const handleClick = () => {
-    signOut(auth).then((val) => {
-      console.log(val, "val");
-      history("/login");
-    });
-  };
+const HomePage = () => {
   return (
-    <div>
-      <div>HomePage</div>
-
-      <button onClick={handleClick}>signOut</button>
-    </div>
-  );
+    <div>HomePage</div>
+  )
 }
 
-export default HomePage;
+export default HomePage
