@@ -1,44 +1,46 @@
-import {React, useContext, useState} from 'react'
-import { auth } from '../firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useNavigate, Link } from 'react-router-dom'
+import { React, useContext, useState } from "react";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate, Link } from "react-router-dom";
 
 import logo from "../assets/logo.png";
 import ErrorPopup from "./ErrorPopup";
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from "../contexts/AuthContext";
 
 const LoginPage = () => {
-    const navigate = useNavigate()
-    const [email, setemail] = useState()
-    const [password, setpassword] = useState()
-    const [loading, setloading] = useState()
-    const [error, seterror] = useState('')
-    const {setcurrentUser} = useContext(AuthContext)
+  const navigate = useNavigate();
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [loading, setloading] = useState("");
+  const [error, seterror] = useState("");
+  const { setcurrentUser } = useContext(AuthContext);
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-        if(!email || !password){
-            seterror('Fill all fields')
-            return;
-        }
-        
-        seterror('')
-        setloading(true)
-        signInWithEmailAndPassword(auth, email, password).then(res => {
-            setcurrentUser(res.user)
-            navigate('/')
-        }).catch((err) => {
-            console.log(err)
-            setloading(false)
-            seterror('Invalid email/password')
-        })
-    };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      seterror("Fill all fields");
+      return;
+    }
+
+    seterror("");
+    setloading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        setcurrentUser(res.user);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        setloading(false);
+        seterror("Invalid email/password");
+      });
+  };
 
   return (
     <div className="bg-bg-black h-screen">
-        {error && <ErrorPopup message={error}/>}
+      {error && <ErrorPopup message={error} />}
       <div className="logo pt-12 flex justify-center items-center">
-        <img src={logo}></img>
+        <img src={logo} alt="logo"></img>
       </div>
       <div className="form flex justify-center items-center mt-16">
         <div className="bg-smokewhite w-96 rounded-md">
@@ -81,7 +83,7 @@ const LoginPage = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

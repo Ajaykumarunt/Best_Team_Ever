@@ -21,47 +21,48 @@ const SignupPage = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if(!email || !firstname || !lastname || !password){
-      seterror('Fill all fields')
+    if (!email || !firstname || !lastname || !password) {
+      seterror("Fill all fields");
       return;
     }
 
-    seterror('')
+    seterror("");
 
-    if(password !== confirmPassword){
-      seterror('Password is not matching')
+    if (password !== confirmPassword) {
+      seterror("Password is not matching");
       return;
     }
-    
-    seterror('')
+
+    seterror("");
 
     const usrdata = {
       first_name: firstname,
       last_name: lastname,
-      email: email
-    }
-    console.log(usrdata)
+      email: email,
+    };
+    console.log(usrdata);
     setloading(true);
-    createUserWithEmailAndPassword(auth, email, password).then(async res => {
-      setloading(false);
-      const user = res.user
-      await setDoc(doc(db, "users", user.uid), usrdata);
-      updateProfile(user, {
-        displayName: firstname,
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (res) => {
+        setloading(false);
+        const user = res.user;
+        await setDoc(doc(db, "users", user.uid), usrdata);
+        updateProfile(user, {
+          displayName: firstname,
+        });
+        navigate("/login");
       })
-      navigate('/login')
-    }).catch((err) => {
-      setloading(false);
-      seterror(err)
-    })
-
+      .catch((err) => {
+        setloading(false);
+        seterror(err);
+      });
   };
 
   return (
     <div className="bg-bg-black h-screen">
-      {error && <ErrorPopup message={error}/>}
+      {error && <ErrorPopup message={error} />}
       <div className="logo pt-12 flex justify-center items-center">
-        <img src={logo}></img>
+        <img src={logo} alt="logo"></img>
       </div>
       <div className="form flex justify-center items-center mt-16">
         <div className="bg-smokewhite w-96 rounded-md">
