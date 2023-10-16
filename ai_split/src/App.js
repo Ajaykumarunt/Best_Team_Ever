@@ -5,6 +5,8 @@ import SignupPage from "./components/SignupPage";
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import { AuthContext } from "./contexts/AuthContext";
+import Groups from "./components/Groups";
+import Activity from './components/Activity'
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -24,6 +26,22 @@ function App() {
         element={
           <ProtectRoute>
             <HomePage />
+          </ProtectRoute>
+        }
+      />
+      <Route
+        path="/groups"
+        element={
+          <ProtectRoute>
+            <Groups />
+          </ProtectRoute>
+        }
+      />
+      <Route
+        path="/activity"
+        element={
+          <ProtectRoute>
+            <Activity />
           </ProtectRoute>
         }
       />
