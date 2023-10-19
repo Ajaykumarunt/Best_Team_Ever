@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Best_Team_Ever/static/css/main.7785a52d.css",
-    "main.js": "/Best_Team_Ever/static/js/main.67282172.js",
+    "main.css": "/Best_Team_Ever/static/css/main.dd33f48e.css",
+    "main.js": "/Best_Team_Ever/static/js/main.31963352.js",
     "static/js/787.485a23bb.chunk.js": "/Best_Team_Ever/static/js/787.485a23bb.chunk.js",
     "index.html": "/Best_Team_Ever/index.html",
-    "main.7785a52d.css.map": "/Best_Team_Ever/static/css/main.7785a52d.css.map",
-    "main.67282172.js.map": "/Best_Team_Ever/static/js/main.67282172.js.map",
+    "main.dd33f48e.css.map": "/Best_Team_Ever/static/css/main.dd33f48e.css.map",
+    "main.31963352.js.map": "/Best_Team_Ever/static/js/main.31963352.js.map",
     "787.485a23bb.chunk.js.map": "/Best_Team_Ever/static/js/787.485a23bb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7785a52d.css",
-    "static/js/main.67282172.js"
+    "static/css/main.dd33f48e.css",
+    "static/js/main.31963352.js"
   ]
 }
