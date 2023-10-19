@@ -10,7 +10,7 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const ProtectRoute = ({ children }) => {
-    return currentUser ? children : <Navigate to="/Best_Team_Ever" />;
+    return currentUser ? children : <Navigate to="/Best_Team_Ever/" />;
   };
 
   return (
@@ -28,7 +28,7 @@ function App() {
         }
       />
       <Route
-        path="/Best_Team_Ever"
+        path="/Best_Team_Ever/"
         element={currentUser ? <Navigate to="/" /> : <LoginPage />}
       />
     </Routes>
