@@ -28,7 +28,7 @@ function App() {
         }
       />
       <Route
-        path="/Best_Team_Ever/"
+        path="/login/"
         element={currentUser ? <Navigate to="/" /> : <LoginPage />}
       />
     </Routes>
