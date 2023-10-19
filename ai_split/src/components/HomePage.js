@@ -11,7 +11,7 @@ function HomePage() {
   const handleClick = () => {
     signOut(auth).then((val) => {
       setcurrentUser(null)
-      history("/login");
+      history("/Best_Team_Ever");
     });
   };
   return (
