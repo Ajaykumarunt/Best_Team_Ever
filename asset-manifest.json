@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Best_Team_Ever/static/css/main.6931feec.css",
-    "main.js": "/Best_Team_Ever/static/js/main.fed42fd3.js",
+    "main.js": "/Best_Team_Ever/static/js/main.59ca72ad.js",
     "static/js/787.485a23bb.chunk.js": "/Best_Team_Ever/static/js/787.485a23bb.chunk.js",
     "static/media/member2.png": "/Best_Team_Ever/static/media/member2.95d1ffd470bd653fc265.png",
     "static/media/person-icon.jpg": "/Best_Team_Ever/static/media/person-icon.8774ba36754824a0e43d.jpg",
@@ -11,11 +11,11 @@
     "static/media/benzjpeg.jpeg": "/Best_Team_Ever/static/media/benzjpeg.0252ae92dbaf14bbc814.jpeg",
     "index.html": "/Best_Team_Ever/index.html",
     "main.6931feec.css.map": "/Best_Team_Ever/static/css/main.6931feec.css.map",
-    "main.fed42fd3.js.map": "/Best_Team_Ever/static/js/main.fed42fd3.js.map",
+    "main.59ca72ad.js.map": "/Best_Team_Ever/static/js/main.59ca72ad.js.map",
     "787.485a23bb.chunk.js.map": "/Best_Team_Ever/static/js/787.485a23bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6931feec.css",
-    "static/js/main.fed42fd3.js"
+    "static/js/main.59ca72ad.js"
   ]
 }
