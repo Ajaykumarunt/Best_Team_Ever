@@ -47,7 +47,7 @@ function App() {
         }
       />
       <Route
-        path="Best_Team_Ever"
+        path="/Best_Team_Ever/"
         element={currentUser ? <Navigate to="/" /> : <LoginPage />}
       />
     </Routes>
