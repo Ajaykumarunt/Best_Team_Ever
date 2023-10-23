@@ -7,7 +7,6 @@ import LoginPage from "./components/LoginPage";
 import { AuthContext } from "./contexts/AuthContext";
 import Groups from "./components/Groups";
 import Activity from './components/Activity'
-import AccountPage from "./components/AccountPage";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -48,15 +47,7 @@ function App() {
         }
       />
       <Route
-        path="/account"
-        element={
-          <ProtectRoute>
-            <AccountPage />
-          </ProtectRoute>
-        }
-      />
-      <Route
-        path="/Best_Team_Ever/"
+        path="Best_Team_Ever"
         element={currentUser ? <Navigate to="/" /> : <LoginPage />}
       />
     </Routes>

@@ -50,7 +50,7 @@ const SignupPage = () => {
         updateProfile(user, {
           displayName: firstname,
         });
-        navigate("/Best_Team_Ever");
+        navigate("/login");
       })
       .catch((err) => {
         setloading(false);
@@ -127,7 +127,7 @@ const SignupPage = () => {
       </div>
 
       <div className="flex justify-center items-center mt-16">
-        <Link className="text-smokewhite" to="/Best_Team_Ever">
+        <Link className="text-smokewhite" to="/login">
           Already have an account? Login
         </Link>
       </div>
