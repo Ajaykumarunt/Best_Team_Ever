@@ -1,5 +1,49 @@
 import React from 'react'
 import add from "../add.png"
+const triggerImageUpload = () => {
+    const fileInput = document.getElementById('imageUpload');
+    if (fileInput) {
+        fileInput.click();
+    }
+};
+const UploadButton = () => {
+    const triggerImageUpload = () => {
+        const fileInput = document.getElementById('imageUpload');
+        if (fileInput) {
+            fileInput.click();
+        }
+    };
+ 
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            // Handle the selected file here
+            console.log('Selected file:', file.name);
+        }
+    };
+ 
+    return (
+        <div>
+            <input 
+                type="file" 
+                id="imageUpload" 
+                style={{ display: 'none' }} 
+                onChange={handleImageUpload}
+            />
+            <button onClick={triggerImageUpload}>
+                <img src={add} alt="+" /> Add Split
+            </button>
+        </div>
+    );
+ }
+const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        // Handle the selected file here
+        console.log('Selected file:', file.name);
+    }
+};
+
 function BalamceHome({ amount }) {
     return (
       <div className="mai">
@@ -9,10 +53,19 @@ function BalamceHome({ amount }) {
       
       <div className="butt">
       {/* < /><br></br> */}
-        <button >
+        {/* <button >
           <img src={add} alt="+" />Add Split
-          </button>
-          
+          </button> */}
+        <input 
+    type="file" 
+    id="imageUpload" 
+    style={{ display: 'none' }} 
+    onChange={handleImageUpload}
+/>
+<button onClick={triggerImageUpload}>
+    <img src={add} alt="+" /> Add Split
+</button>
+  
   
       </div>
       </div>
