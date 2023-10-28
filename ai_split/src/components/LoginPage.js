@@ -1,7 +1,11 @@
 import { React, useContext, useState } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
+import {
+  doc,
+  getDoc,
+} from "firebase/firestore";
 
 import logo from "../assets/logo.png";
 import ErrorPopup from "./ErrorPopup";
@@ -25,8 +29,16 @@ const LoginPage = () => {
     seterror("");
     setloading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        setcurrentUser(res.user);
+      .then(async (res) => {
+        const usrDocRef = doc(db, "users", res.user.uid);
+        const usrDocSnap = await getDoc(usrDocRef);
+
+        if (usrDocSnap.exists()) {
+          setcurrentUser(usrDocSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+        
         navigate("/");
       })
       .catch((err) => {
