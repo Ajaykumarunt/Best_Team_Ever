@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import add from "../add.png"
+import ExpenseEntryForm from './ExpenseEntryForm';
+import { useNavigate } from 'react-router-dom';
 const triggerImageUpload = () => {
   const fileInput = document.getElementById('imageUpload');
   if (fileInput) {
     fileInput.click();
   }
+};
+const handleClick = () => {
+
 };
 const UploadButton = () => {
   const triggerImageUpload = () => {
@@ -45,6 +50,17 @@ const handleImageUpload = (event) => {
 };
 
 function BalamceHome({ amount }) {
+  const navigate = useNavigate();
+  const [expense, setExpense] = useState('');
+  const [group, setGroup] = useState('');
+  const handleClick = () => {
+    navigate('/expense-entry', {
+      state: {
+        expense,
+        group
+      }
+    });
+  };
     return (
     <div className="mai">
       <div className="balance">
@@ -65,6 +81,7 @@ function BalamceHome({ amount }) {
         <button onClick={triggerImageUpload}>
           <img src={add} alt="+" /> Add Split
         </button>
+        <button onClick={handleClick}>Manually</button>
                 
       
       </div>
