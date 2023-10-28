@@ -1,0 +1,33 @@
+import React, { useState } from 'react';
+import { Route, Outlet } from 'react-router-dom';
+function ExpenseEntryForm() {
+  const [expense, setExpense] = useState('');
+  const [group, setGroup] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // save the expense and group selection to a database or other data store
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="number"
+        placeholder="Expense"
+        value={expense}
+        onChange={(event) => setExpense(event.target.value)}
+      />
+
+      <select name="group" value={group} onChange={(event) => setGroup(event.target.value)}>
+        <option value="">Select Group</option>
+        <option value="1">Group 1</option>
+        <option value="2">Group 2</option>
+      </select>
+
+      <button type="submit">Save</button>
+    </form>
+  );
+}
+
+export default ExpenseEntryForm;
