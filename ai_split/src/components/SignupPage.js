@@ -10,16 +10,43 @@ import { doc, setDoc } from "firebase/firestore";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const [error, seterror] = useState();
-  const [email, setemail] = useState();
-  const [password, setpassword] = useState();
-  const [confirmPassword, setconfirmPassword] = useState();
-  const [firstname, setfirstname] = useState();
-  const [lastname, setlastname] = useState();
+  const [error, seterror] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
   const [loading, setloading] = useState(false);
+
+  function SubmitButton() {
+    if (email && password && password.length > 8 && confirmPassword) {
+      return (
+        <button
+          type="submit"
+          className="bg-light-green p-2 rounded-md"
+          disabled={loading}
+          onClick={handleSignup}
+        >
+          Submit
+        </button>
+      );
+    } else {
+      return (
+        <button
+          type="submit"
+          className="bg-light-green p-2 rounded-md disabled:bg-gray-400"
+          disabled={true || loading}
+          onClick={handleSignup}
+        >
+          Submit
+        </button>
+      );
+    }
+  }
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    console.log('inside handle signup')
 
     if (!email || !firstname || !lastname || !password) {
       seterror("Fill all fields");
@@ -39,7 +66,14 @@ const SignupPage = () => {
       first_name: firstname,
       last_name: lastname,
       email: email,
+      groups:{
+        ids:[]
+      },
+      friends:[
+      ]
     };
+
+
     console.log(usrdata);
     setloading(true);
     createUserWithEmailAndPassword(auth, email, password)
@@ -113,14 +147,7 @@ const SignupPage = () => {
                 onChange={(e) => setconfirmPassword(e.target.value)}
                 required
               />
-              <button
-                disabled={loading}
-                className="bg-light-green p-2 rounded-md disabled:bg-gray-400"
-                type="submit"
-                onClick={handleSignup}
-              >
-                Submit
-              </button>
+              <SubmitButton />
             </form>
           </div>
         </div>
