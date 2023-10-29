@@ -1,5 +1,6 @@
 /* App.css */
 .app {
+<<<<<<< HEAD
   background-color: black;
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -93,3 +94,99 @@ button {
   padding: 10px 20px;
   margin-top: 10px;
 }
+=======
+    background: color #f4f4f4;;
+    font-family: Arial, sans-serif;
+    
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .profile {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .balance {
+    background-color: #f5f5f5;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    height: 90px;
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mai{
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .butt {
+    background-color: #f5f5f5;
+    padding: 10px 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    border: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+  }
+  
+  .member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+  
+  /* button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+  }
+   */
+  .mempic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .Mem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+>>>>>>> a3ced30b789825d7231d733d0311bd7c0dd09be7
