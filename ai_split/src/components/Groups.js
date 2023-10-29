@@ -58,8 +58,8 @@ function Groups() {
       <div className="w-1/4">
         <SideNavigation />
       </div>
-      <div >
-        <div className="w-3/4 p-8">
+      <div className="w-3/4 p-8">
+        <div >
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-4xl font-bold">Groups</h2>
             <button
@@ -121,7 +121,24 @@ function Groups() {
           )}
         </div>
 
-
+        <div className="p-6">
+          {userGroups.length > 0 ? (
+            <>
+              <h1 className="text-2xl mb-4">Groups the user is a member of:</h1>
+              <ul className="list-disc pl-5">
+                {userGroups.map((groupName) => (
+                  <li key={groupName} className="mb-2">
+                    {groupName}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="text-xl font-bold mb-4 text-red-500">
+              No groups found
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
