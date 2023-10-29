@@ -14,23 +14,38 @@ const MemberHome = () => {
 
   useEffect(() => {
     const fetchFriendNames = async () => {
+      if (!db) {
+        console.error("Database not initialized");
+        return;
+      }
+
+      const userDoc = doc(db, "users", "wWyIkz8FWWagXyWr7Ngpsd1F1cT2");
+      if (!userDoc) {
+        console.error("User document not found");
+        return;
+      }
+
       try {
-        const userDoc = doc(db, "users", "xtSTRqzIHRcqxq4UQIeZIrpojA22");
         const userSnapshot = await getDoc(userDoc);
 
         const userData = userSnapshot.data();
         if (userData && userData.friends) {
           const names = userData.friends.map((friend) => friend.first_name);
-          console.log(userData.friends[0]);  // log the first friend to inspect the structure
+
+          console.log(userData.friends[0]);
           console.log(userData.friends[1]);
 
           setFriendNames((prevNames) => [...prevNames, ...names]);
 
-          //const balances = userData.friends.map((friend) => friend.balance);
-          const balances = userData.friends.map((friend) => {
-            // Check if balance is defined, if not, set to "0"
-            return friend.balance !== undefined ? friend.balance : "0";
-          });
+          let balances = [];
+          for (let i = 0; i < userData.friends.length; i++) {
+            if (userData.friends[i].balance !== undefined) {
+              balances.push(userData.friends[i].balance);
+            } else {
+              balances.push("0");
+            }
+          }
+
           console.log(balances);
           setFriendBalance((prevBalances) => prevBalances.concat(balances));
         }
@@ -46,24 +61,29 @@ const MemberHome = () => {
     <div className="p-6 bg-gray-50 min-h-screen">
       <h1 className="text-2xl font-bold mb-4">Friends List</h1>
       <div className="bg-white p-4 rounded-lg shadow-md max-h-96 overflow-y-auto">
-        {friendNames.map((name, index) => (
-          <div
-            key={name}
-            className="flex justify-between p-2 border-b last:border-0"
-          >
-            <span>{name}</span>
-            <span
-              className={`font-medium ${
-                friendBalance[index] < 0 ? "text-red" : "text-green-500"
-              }`}
+        {friendNames.length === 0 ? (
+          <div className="text-center py-4">No Friends</div>
+        ) : (
+          friendNames.map((name, index) => (
+            <div
+              key={name}
+              className="flex justify-between p-2 border-b last:border-0"
             >
-              {friendBalance[index]}
-            </span>
-          </div>
-        ))}
+              <span>{name}</span>
+              <span
+                className={`font-medium ${
+                  friendBalance[index] < 0 ? "text-red" : "text-green-500"
+                }`}
+              >
+                {friendBalance[index]}
+              </span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
+
 };
 
 export default MemberHome;
