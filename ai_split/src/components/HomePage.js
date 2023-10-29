@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import SideNavigation from "./SideNavigation";
 import Profile from "./profile";
-import MemberComponent from "./MemberHome"
+import MemberComponent from "./memberHome.js"
 import BalanceComponent from "./BalamceHome"
 import '../App.css';
 function HomePage() {
