@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import SideNavigation from "./SideNavigation";
 import Profile from "./profile";
-import MemberComponent from "./memberHome"
+import MemberComponent from "./MemberHome"
 import BalanceComponent from "./BalamceHome"
 import '../App.css';
 function HomePage() {
@@ -35,7 +35,7 @@ function HomePage() {
       <br>
       </br>
       <br></br>
-      <h2 className="text-4xl font-bold">Group Name</h2>
+      
       <MemberComponent name="Member 1" amount={23.43} />
       </div>
      
