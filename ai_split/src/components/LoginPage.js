@@ -1,15 +1,11 @@
 import { React, useContext, useState } from "react";
 import { auth, db } from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
-import {
-  doc,
-  getDoc,
-} from "firebase/firestore";
 
 import logo from "../assets/logo.png";
 import ErrorPopup from "./ErrorPopup";
 import { AuthContext } from "../contexts/AuthContext";
+import { firebaseSignup } from "./FireBaseFunc";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,37 +13,27 @@ const LoginPage = () => {
   const [password, setpassword] = useState("");
   const [loading, setloading] = useState("");
   const [error, seterror] = useState("");
-  const { setcurrentUser } = useContext(AuthContext);
+  const { setcurrentUser, currentUserId, setcurrentUserId } = useContext(AuthContext);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       seterror("Fill all fields");
       return;
     }
-
     seterror("");
     setloading(true);
-    signInWithEmailAndPassword(auth, email, password)
-      .then(async (res) => {
-        const usrDocRef = doc(db, "users", res.user.uid);
-        const usrDocSnap = await getDoc(usrDocRef);
-
-        if (usrDocSnap.exists()) {
-          setcurrentUser(usrDocSnap.data());
-        } else {
-          console.log("No such document!");
-        }
-        
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        setloading(false);
-        seterror("Invalid email/password");
-      });
+    try {
+      const userData = await firebaseSignup(auth, db, email, password, setcurrentUserId);
+      setcurrentUser(userData);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setloading(false);
+      seterror("Invalid email/password");
+    }
   };
-
+  console.log(currentUserId)
   return (
     <div className="bg-bg-black h-screen">
       {error && <ErrorPopup message={error} />}

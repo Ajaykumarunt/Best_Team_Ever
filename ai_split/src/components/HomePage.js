@@ -5,19 +5,19 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import SideNavigation from "./SideNavigation";
 import Profile from "./profile";
-import MemberComponent from "./memberHome"
+import MemberComponent from "./memberHome.js"
 import BalanceComponent from "./BalamceHome"
 import '../App.css';
+import { handleLogout } from "./FireBaseFunc";
 function HomePage() {
   
   const { setcurrentUser } = useContext(AuthContext);
   const history = useNavigate();
-  const handleClick = () => {
-    signOut(auth).then((val) => {
-      setcurrentUser(null)
-      history("/Best_Team_Ever");
-    });
-  };
+  
+  const handleLogoutClick = () => {
+    handleLogout(auth, setcurrentUser, history);
+  }
+
   return (
     <div className="flex">
       <div className="w-1/4">
@@ -29,13 +29,13 @@ function HomePage() {
        <div className="flex justify-between w-full">
        <h2 className="text-4xl font-bold">Home</h2>
       
-      <button className="w-24 h-15 bg-red text-smokewhite" onClick={handleClick}>Log Out</button>
+      <button className="w-24 h-15 bg-red text-smokewhite" onClick={handleLogoutClick}>Log Out</button>
       </div>
       <BalanceComponent amount={70.11} />
       <br>
       </br>
       <br></br>
-      <h2 className="text-4xl font-bold">Group Name</h2>
+      
       <MemberComponent name="Member 1" amount={23.43} />
       </div>
      
