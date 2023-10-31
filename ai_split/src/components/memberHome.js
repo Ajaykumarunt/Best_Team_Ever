@@ -6,7 +6,8 @@ import { db } from "../firebase.js";
 import { doc, getDoc } from "firebase/firestore";
 
 const members = ["Member_1"];
-const mempic = [Member_1, Member_2, Member_3];
+const mempic = [Member_1, Member_2, Member_3, Member_1,Member_3];
+
 
 const MemberHome = () => {
   const [friendNames, setFriendNames] = useState([]);
