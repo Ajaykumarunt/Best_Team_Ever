@@ -7,20 +7,12 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setcurrentUser] = useState(
     JSON.parse(localStorage.getItem("user"))
   );
-  
-  const [currentUserId, setcurrentUserId] = useState(
-    localStorage.getItem("userId")
-  );
+  const [currentUserId, setcurrentUserId] = useState(JSON.parse(localStorage.getItem("userId")))
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
-  }, [currentUser]);
-
-  useEffect(() => {
-    if (currentUserId) {
-      localStorage.setItem("userId", currentUserId);
-    }
-  }, [currentUserId]);
+    localStorage.setItem("userId", JSON.stringify(currentUserId));
+  }, [currentUser, currentUserId]);
 
   return (
     <AuthContext.Provider value={{ currentUser, setcurrentUser, currentUserId, setcurrentUserId }}>
