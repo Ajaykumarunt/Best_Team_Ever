@@ -49,7 +49,6 @@ const MemberHome = () => {
 
           //setFriendNames((prevNames) => [...prevNames, ...names]);
           setFriendNames(names);
-          setloading(false)
 
           let balances = [];
           for (let i = 0; i < userData.friends.length; i++) {
@@ -67,6 +66,8 @@ const MemberHome = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+
+      setloading(false)
     }
     };
 
@@ -76,7 +77,7 @@ const MemberHome = () => {
   return (
     <div className="bg-white px-10 py-6 rounded-lg mt-12 h-5/6 w-full overflow-scroll">
       {loading ? (<p>Loading...</p>):(friendNames.length === 0 ? (
-        <p className="text-2xl font-medium h-full flex justify-center items-center">No Friends</p>
+        <p className="text-2xl h-full flex justify-center items-center">No friends to display</p>
       ) : (
         friendNames.map((name, index) => (
           <div
