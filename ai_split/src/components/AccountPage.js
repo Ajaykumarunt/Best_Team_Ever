@@ -1,23 +1,25 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import SideNavigation from "./SideNavigation";
+import { handleLogout } from "./FireBaseFunc";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const ActivityPage = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, setcurrentUser } = useContext(AuthContext);
   const [FirstName, setFirstName] = useState(currentUser.first_name);
   const [LastName, setLastName] = useState(currentUser.last_name);
   const [email, setEmail] = useState(currentUser.email);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [profileImage, setProfileImage] = useState(null);
+  const history = useNavigate();
 
   const handleImageUpload = (e) => {
     // Handle image upload logic here
   };
 
   const handleUpdateProfile = () => {
-    // Handle profile update logic here
-    // Check if the email is in the correct format
     const emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if (!email.match(emailFormat)) {
       alert("Email is not in a valid format.");
@@ -31,8 +33,8 @@ const ActivityPage = () => {
     }
   };
 
-  const handleLogout = () => {
-    // Handle logout logic here
+  const handleLogoutClick = () => {
+    handleLogout(auth, setcurrentUser, history);
   };
 
   const handleDeleteAccount = () => {
@@ -41,19 +43,17 @@ const ActivityPage = () => {
 
   return (
     <div className="flex">
-      <div className="w-90">
-        {/* SideNavigation Component */}
+      <div className="w-1/4">
         <SideNavigation />
       </div>
-      <div className="main-content bg-zinc-200 w-full">
-        <div className="flex flex-col lg:flex-row justify-between w-2/3 mt-10">
-          <h1 className="text-5xl font-bold ml-2 lg:ml-20 mr-2 lg:mr-96">
-            Account
-          </h1>
-          <div className="lg:flex justify-center ml-2 lg:ml-80">
+      <div className="main-content bg-smokewhite w-3/4">
+        <div className="flex justify-between pt-12 px-16">
+          <h1 className="text-5xl font-bold">Account</h1>
+          <div className="">
             <button
               className="bg-bg-black text-white p-3 text-lg rounded-lg hover:bg-stone-600 mr-6 lg:mr-5"
               type="button"
+              onClick={handleLogoutClick}
             >
               Log out
             </button>
@@ -65,49 +65,56 @@ const ActivityPage = () => {
             </button>
           </div>
         </div>
-        <div className="form flex-auto">
-          <div className="form-row justify-items-stretch ml-2 lg:ml-80">
-            <div className="mt-10">
-              <label
-                htmlFor="First Name"
-                className="text-gray-600 font-semibold"
-              >
-                First Name
-              </label>
-              <label
-                htmlFor="Last Name"
-                className="ml-2 lg:ml-40 text-gray-600 font-semibold"
-              >
-                Last Name
-              </label>
-              <label
-                htmlFor="email"
-                className="ml-2 lg:ml-40 text-gray-600 font-semibold"
-              >
-                Email
-              </label>
+        <div className="mt-24">
+          <div className="">
+            <div className="flex justify-between">
+              <div>
+                <label
+                  htmlFor="First Name"
+                  className="font-semibold"
+                >
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  value={FirstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="First Name"
+                  className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="Last Name"
+                  className="font-semibold"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={LastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Last Name"
+                  className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="font-semibold"
+                >
+                  Email
+                </label>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                  className="ml-2.5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              value={FirstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First Name"
-              className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
-            />
-            <input
-              type="text"
-              value={LastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last Name"
-              className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
-            />
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              className="ml-2.5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
-            />
           </div>
           <div className="form-row justify-items-stretch ml-2 lg:ml-80">
             <div className="mt-10">
@@ -123,21 +130,21 @@ const ActivityPage = () => {
               >
                 Confirm Password
               </label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="New Password"
+                className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+              />
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm Password"
+                className="ml-2.5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+              />
             </div>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="New Password"
-              className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
-            />
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm Password"
-              className="ml-2.5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
-            />
           </div>
           <div className="flex justify-center image-upload-section rounded-lg">
             <div className="relative justify-center">
