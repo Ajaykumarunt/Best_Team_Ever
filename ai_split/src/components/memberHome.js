@@ -1,17 +1,23 @@
 import Member_1 from "../member1.png";
 import Member_2 from "../member2.png";
 import Member_3 from "../member3.png";
-import React, { useEffect, useState } from "react";
+import React, { useContext,useEffect, useState } from "react";
 import { db } from "../firebase.js";
+import { AuthContext } from "../contexts/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 
 const members = ["Member_1"];
-const mempic = [Member_1, Member_2, Member_3, Member_1, Member_3];
+
+const mempic = [Member_1, Member_2, Member_3];
+
 
 const MemberHome = () => {
   const [friendNames, setFriendNames] = useState([]);
   const [friendBalance, setFriendBalance] = useState([]);
   const [loading, setloading] = useState(false)
+
+  const { currentUserId } = useContext(AuthContext);
+
 
   useEffect(() => {
     const fetchFriendNames = async () => {
@@ -19,9 +25,13 @@ const MemberHome = () => {
         console.error("Database not initialized");
         return;
       }
-      setloading(true)
 
-      const userDoc = doc(db, "users", "xtSTRqzIHRcqxq4UQIeZIrpojA22");
+      setloading(true)
+      console.error(currentUserId);
+      if (currentUserId!=null){
+       
+      const userDoc = doc(db, "users", currentUserId);
+
       if (!userDoc) {
         console.error("User document not found");
         return;
@@ -57,6 +67,7 @@ const MemberHome = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+    }
     };
 
     fetchFriendNames();
