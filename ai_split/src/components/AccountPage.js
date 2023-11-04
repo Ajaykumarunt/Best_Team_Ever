@@ -67,11 +67,11 @@ const ActivityPage = () => {
         </div>
         <div className="mt-24">
           <div className="">
-            <div className="flex justify-between">
-              <div>
+            <div className="flex justify-between px-16">
+              <div className="flex flex-col">
                 <label
                   htmlFor="First Name"
-                  className="font-semibold"
+                  className="font-semibold mb-2"
                 >
                   First Name
                 </label>
@@ -80,14 +80,14 @@ const ActivityPage = () => {
                   value={FirstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   placeholder="First Name"
-                  className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+                  className="rounded-md py-2 px-4 bg-white border-2 border-black w-64"
                 />
               </div>
 
-              <div>
+              <div className="flex flex-col">
                 <label
                   htmlFor="Last Name"
-                  className="font-semibold"
+                  className="font-semibold mb-2"
                 >
                   Last Name
                 </label>
@@ -96,13 +96,13 @@ const ActivityPage = () => {
                   value={LastName}
                   onChange={(e) => setLastName(e.target.value)}
                   placeholder="Last Name"
-                  className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+                  className="rounded-md py-2 px-4 bg-white border-2 border-black w-64"
                 />
               </div>
-              <div>
+              <div className="flex flex-col">
                 <label
                   htmlFor="email"
-                  className="font-semibold"
+                  className="font-semibold mb-2"
                 >
                   Email
                 </label>
@@ -111,42 +111,49 @@ const ActivityPage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
-                  className="ml-2.5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
+                  className="rounded-md py-2 px-4 bg-white border-2 border-black w-80"
                 />
               </div>
             </div>
           </div>
-          <div className="form-row justify-items-stretch ml-2 lg:ml-80">
-            <div className="mt-10">
-              <label
-                htmlFor="password"
-                className="mr-2 text-gray-600 font-semibold"
-              >
-                Password
-              </label>
-              <label
-                htmlFor="confirm password"
-                className="ml-2 lg:ml-44 text-gray-600 font-semibold"
-              >
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="New Password"
-                className="mr-5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
-              />
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm Password"
-                className="ml-2.5 rounded-md py-2 px-4 bg-white hover:bg-gray-300 focus:outline-black transition duration-300"
-              />
+          <div className="form-row px-16 mt-10">
+            <div className="flex justify-between">
+              
+              <div className="flex flex-col">
+                <label
+                  htmlFor="password"
+                  className="mb-2 text-bg-black font-semibold"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="New Password"
+                  className="rounded-md py-2 px-4 bg-white border-2 border-black w-64"
+                />
+              </div>
+
+              <div className="flex flex-col">
+                <label
+                  htmlFor="confirm password"
+                  className="text-bg-black font-semibold mb-2"
+                >
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm Password"
+                  className="rounded-md py-2 px-4 bg-white border-2 border-black w-64"
+                />
+              </div>
+              <div className="w-80"></div>
             </div>
           </div>
-          <div className="flex justify-center image-upload-section rounded-lg">
+          <div className="flex justify-center image-upload-section rounded-lg mt-12">
             <div className="relative justify-center">
               <label htmlFor="profile-image" className="cursor-pointer block">
                 <div className="bg-gray-200 rounded-full p-4 w-16 h-16 flex items-center justify-center transition-transform transform hover:scale-110">
@@ -171,7 +178,7 @@ const ActivityPage = () => {
           <div className="flex justify-center mt-9">
             <button
               onClick={handleUpdateProfile}
-              className="green-button bg-green-400 text-white p-4 rounded-lg text-lg hover:bg-green-600"
+              className="green-button bg-light-green text-bg-black p-4 rounded-lg text-lg w-48"
             >
               Update
             </button>

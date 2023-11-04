@@ -44,12 +44,24 @@ const SignupPage = () => {
     }
   }
 
+  function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+  }
+
   const handleSignup = async (e) => {
     e.preventDefault();
-    console.log('inside handle signup')
+    console.log("inside handle signup");
 
     if (!email || !firstname || !lastname || !password) {
       seterror("Fill all fields");
+      return;
+    }
+
+    seterror("");
+
+    if (!isValidEmail(email)) {
+      seterror("Invalid email format");
       return;
     }
 
@@ -66,13 +78,11 @@ const SignupPage = () => {
       first_name: firstname,
       last_name: lastname,
       email: email,
-      groups:{
-        ids:[]
+      groups: {
+        ids: [],
       },
-      friends:[
-      ]
+      friends: [],
     };
-
 
     console.log(usrdata);
     setloading(true);
@@ -88,7 +98,9 @@ const SignupPage = () => {
       })
       .catch((err) => {
         setloading(false);
-        seterror(err);
+        seterror(
+          err.message.includes("email-already") ? "Email already exists" : ""
+        );
       });
   };
 
