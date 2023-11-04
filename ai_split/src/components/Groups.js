@@ -4,8 +4,10 @@ import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import SideNavigation from "./SideNavigation";
+import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+//import { getFirestore, collection, getDocs } from "firebase/firestore";
 import app from "../firebase.js";
 
 function Groups() {
@@ -15,21 +17,19 @@ function Groups() {
   const [selectedUsers, setSelectedUsers] = useState({});
   const [showSearchBox, setShowSearchBox] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [checkedEmails, setCheckedEmails] = useState([]);
+  const [CheckedEmails, setCheckedEmails] = useState([]);
   const [userGroups, setUserGroups] = useState([]);
-  const userId = "xtSTRqzIHRcqxq4UQIeZIrpojA22";
+  //const userId = "xtSTRqzIHRcqxq4UQIeZIrpojA22";
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
 
-  const handleSelectedEmails = (selected) => {
-    const emails = Object.keys(selected).filter((email) => selected[email]);
-    setCheckedEmails(emails);
-  };
+  // const handleSelectedEmails = (selected) => {
+  //   const emails = Object.keys(selected).filter((email) => selected[email]);
+  //   //console.log(`these are selected emails : ${selected}`);
+  //   setCheckedEmails(emails);
+  //   //console.log(`these are selected emails : ${checkedEmails}`);
+  // };
 
-  const handleSignOut = () => {
-    signOut(auth).then(() => {
-      setcurrentUser(null);
-      navigate("/Best_Team_Ever");
-    });
-  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +45,9 @@ function Groups() {
 
   const handleCheckboxChange = (name) => {
     setSelectedUsers((prev) => ({ ...prev, [name]: !prev[name] }));
-    console.log(selectedUsers);
+    // const emails = Object.keys(name).filter((email) => name[email]);
+    // setCheckedEmails(emails);
+    // console.log(CheckedEmails);
   };
 
   const filteredNames = userNames.filter(
@@ -99,7 +101,23 @@ function Groups() {
               <button
                 className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
                 onClick={async () => {
+
                   // Continue here to write data to firebase. selectedUsers variable contains email id.
+                  const db = getFirestore(app);
+                  const usersCollection = collection(db, "users");
+                  
+                  let userIds = [];
+                  for (let email of Object.keys(selectedUsers)) {
+                      const q = query(usersCollection, where("email", "==", email));
+                      
+                      const querySnapshot = await getDocs(q);
+                      querySnapshot.forEach((doc) => {
+                          userIds.push(doc.id); // assuming the document ID is the user ID
+                        });
+                  }
+              
+                  setSelectedUserIds(userIds);
+                  console.log("User IDs:", userIds);
                 }}
               >
                 Submit
@@ -107,11 +125,11 @@ function Groups() {
             </div>
           )}
 
-          {checkedEmails.length > 0 && (
+          {CheckedEmails.length > 0 && (
             <div className="mt-8">
               <h3 className="text-xl font-semibold mb-4">Selected Emails:</h3>
               <ul className="bg-gray-100 p-4 rounded shadow-md">
-                {checkedEmails.map((email) => (
+                {CheckedEmails.map((email) => (
                   <li key={email} className="border-b py-2">
                     {email}
                   </li>
