@@ -6,8 +6,10 @@ import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import { AuthContext } from "./contexts/AuthContext";
 import Groups from "./components/Groups";
-import Activity from './components/Activity'
+import Activity from "./components/Activity";
 import AccountPage from "./components/AccountPage";
+import ExpenseEntryForm from "./components/ExpenseEntryForm";
+import BalamceHome from "./components/BalamceHome";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -52,6 +54,15 @@ function App() {
         element={
           <ProtectRoute>
             <AccountPage />
+          </ProtectRoute>
+        }
+      />
+
+      <Route
+        path="/expense-entry"
+        element={
+          <ProtectRoute>
+            <ExpenseEntryForm />
           </ProtectRoute>
         }
       />
