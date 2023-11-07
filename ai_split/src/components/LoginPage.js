@@ -13,7 +13,8 @@ const LoginPage = () => {
   const [password, setpassword] = useState("");
   const [loading, setloading] = useState("");
   const [error, seterror] = useState("");
-  const { setcurrentUser, currentUserId, setcurrentUserId } = useContext(AuthContext);
+  const { setcurrentUser, currentUserId, setcurrentUserId } =
+    useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,7 +25,13 @@ const LoginPage = () => {
     seterror("");
     setloading(true);
     try {
-      const userData = await firebaseSignup(auth, db, email, password, setcurrentUserId);
+      const userData = await firebaseSignup(
+        auth,
+        db,
+        email,
+        password,
+        setcurrentUserId
+      );
       setcurrentUser(userData);
       navigate("/");
     } catch (err) {
@@ -33,7 +40,7 @@ const LoginPage = () => {
       seterror("Invalid email/password");
     }
   };
-  console.log(currentUserId)
+  //console.log(currentUserId)
   return (
     <div className="bg-bg-black h-screen">
       {error && <ErrorPopup message={error} />}

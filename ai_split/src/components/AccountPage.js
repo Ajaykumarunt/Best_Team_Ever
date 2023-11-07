@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import SideNavigation from "./SideNavigation";
-import { handleLogout } from "./FireBaseFunc";
-import { auth } from "../firebase";
+import { handleLogout, handleDeleteAccountMain } from "./FireBaseFunc";
+import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 const ActivityPage = () => {
-  const { currentUser, setcurrentUser } = useContext(AuthContext);
+  const { currentUser, setcurrentUser, currentUserId } =
+    useContext(AuthContext);
   const [FirstName, setFirstName] = useState(currentUser.first_name);
   const [LastName, setLastName] = useState(currentUser.last_name);
   const [email, setEmail] = useState(currentUser.email);
@@ -34,11 +35,25 @@ const ActivityPage = () => {
   };
 
   const handleLogoutClick = () => {
+    console.log(db);
     handleLogout(auth, setcurrentUser, history);
   };
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     // Handle delete account logic here
+    try {
+      if (window.confirm("Do you want to delete your account?")) {
+        //console.log(db);
+        handleDeleteAccountMain(db, currentUserId, history);
+        //handleLogoutClick();
+        //} else {
+        //console.log(currentUserId);
+      } else {
+        console.log("Delete Abort");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -60,6 +75,7 @@ const ActivityPage = () => {
             <button
               className="bg-red text-white p-3 rounded-lg text-lg hover:bg-rose-600"
               type="button"
+              onClick={handleDeleteAccount}
             >
               Delete Account
             </button>
@@ -69,10 +85,7 @@ const ActivityPage = () => {
           <div className="">
             <div className="flex justify-between px-16">
               <div className="flex flex-col">
-                <label
-                  htmlFor="First Name"
-                  className="font-semibold mb-2"
-                >
+                <label htmlFor="First Name" className="font-semibold mb-2">
                   First Name
                 </label>
                 <input
@@ -85,10 +98,7 @@ const ActivityPage = () => {
               </div>
 
               <div className="flex flex-col">
-                <label
-                  htmlFor="Last Name"
-                  className="font-semibold mb-2"
-                >
+                <label htmlFor="Last Name" className="font-semibold mb-2">
                   Last Name
                 </label>
                 <input
@@ -100,10 +110,7 @@ const ActivityPage = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label
-                  htmlFor="email"
-                  className="font-semibold mb-2"
-                >
+                <label htmlFor="email" className="font-semibold mb-2">
                   Email
                 </label>
                 <input
@@ -118,7 +125,6 @@ const ActivityPage = () => {
           </div>
           <div className="form-row px-16 mt-10">
             <div className="flex justify-between">
-              
               <div className="flex flex-col">
                 <label
                   htmlFor="password"
