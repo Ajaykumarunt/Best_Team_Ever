@@ -1,4 +1,9 @@
-import { signInWithEmailAndPassword, signOut, deleteUser } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  deleteUser,
+  getAuth,
+} from "firebase/auth";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 
 export const firebaseSignup = async (
@@ -36,19 +41,22 @@ export const handleLogout = async (auth, setcurrentUser, history) => {
 
 export const handleDeleteAccountMain = async (
   auth,
+  userID,
   setcurrentUser,
   history
 ) => {
   try {
-    const currentUser = setcurrentUser;
-    const data = doc(auth, "users", currentUser);
-    //console.log(auth);
+    //const data = doc(auth, "users", userID);
+    const authe = getAuth();
+    const user = authe.currentUser;
+    console.log(user);
     //console.log(data);
-    await deleteDoc(data);
-    //await deleteUser(currentUser);
-    setcurrentUser(null);
-    history("/Best_Team_Ever");
-    console.log("deleted");
+    await deleteDoc(doc(auth, "users", userID));
+    await deleteUser(user).then(() => {
+      setcurrentUser(null);
+      history("/Best_Team_Ever");
+      console.log("deleted");
+    });
   } catch (error) {
     console.log(error);
   }

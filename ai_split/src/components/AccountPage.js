@@ -44,7 +44,7 @@ const ActivityPage = () => {
     try {
       if (window.confirm("Do you want to delete your account?")) {
         //console.log(db);
-        handleDeleteAccountMain(db, currentUserId, history);
+        handleDeleteAccountMain(db, currentUserId, setcurrentUser, history);
         //handleLogoutClick();
         //} else {
         //console.log(currentUserId);
