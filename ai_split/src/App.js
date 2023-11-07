@@ -8,6 +8,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import Groups from "./components/Groups";
 import Activity from "./components/Activity";
 import AccountPage from "./components/AccountPage";
+import SplitOptions from "./components/SplitOptions";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -55,6 +56,14 @@ function App() {
           </ProtectRoute>
         }
       />
+      <Route
+      path="/split_options"
+      element={
+        <ProtectRoute>
+          <SplitOptions />
+        </ProtectRoute>
+      }
+    />
       <Route
         path="/Best_Team_Ever"
         element={currentUser ? <Navigate to="/" /> : <LoginPage />}

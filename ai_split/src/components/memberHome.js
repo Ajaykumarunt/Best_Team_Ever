@@ -65,9 +65,10 @@ const MemberHome = () => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally{
+        setloading(false)
       }
 
-      setloading(false)
     }
     };
 
