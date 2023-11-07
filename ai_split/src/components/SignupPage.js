@@ -82,6 +82,8 @@ const SignupPage = () => {
         ids: [],
       },
       friends: [],
+      activity: [],
+      total_balance: 0.00
     };
 
     console.log(usrdata);

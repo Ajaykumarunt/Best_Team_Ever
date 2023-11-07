@@ -24,13 +24,6 @@ function Groups() {
     setCheckedEmails(emails);
   };
 
-  const handleSignOut = () => {
-    signOut(auth).then(() => {
-      setcurrentUser(null);
-      navigate("/Best_Team_Ever");
-    });
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       const db = getFirestore(app);
@@ -44,6 +37,7 @@ function Groups() {
   }, []);
 
   const handleCheckboxChange = (name) => {
+    handleSelectedEmails()
     setSelectedUsers((prev) => ({ ...prev, [name]: !prev[name] }));
     console.log(selectedUsers);
   };
