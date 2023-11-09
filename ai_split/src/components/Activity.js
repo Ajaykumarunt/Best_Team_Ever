@@ -52,11 +52,11 @@ const Activity = () => {
       <div className="w-1/4">
         <SideNavigation />
       </div>
-      <div className="w-3/4 bg-smokewhite">
-        <h1 className="text-4xl font-bold ml-16 py-6">Activity</h1>
+      <div className="w-3/4 bg-smokewhite px-16 py-12">
+        <h1 className="text-5xl font-bold mb-12">Activity</h1>
 
-        <div className="mx-16 h-5/6">
-          <div className="bg-white px-10 py-6 rounded-lg mt-8 h-90 w-full overflow-scroll">
+        <div className="h-5/6">
+          <div className="bg-smokewhite px-10 py-6 rounded-lg mt-8 h-90 w-full overflow-scroll">
             {loading ? (
               <p className="flex justify-center items-center h-full">
                 Loading...
