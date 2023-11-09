@@ -9,6 +9,7 @@ import Groups from "./components/Groups";
 import Activity from "./components/Activity";
 import AccountPage from "./components/AccountPage";
 import SplitOptions from "./components/SplitOptions";
+import CreateGroup from "./components/CreateGroup";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -37,6 +38,14 @@ function App() {
         element={
           <ProtectRoute>
             <Groups />
+          </ProtectRoute>
+        }
+      />
+      <Route
+        path="/creategroup"
+        element={
+          <ProtectRoute>
+            <CreateGroup />
           </ProtectRoute>
         }
       />
