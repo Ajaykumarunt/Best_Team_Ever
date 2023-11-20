@@ -139,9 +139,13 @@ const CreateGroup = () => {
                         (friend) => friend.email
                       );
 
+                      console.log(existingEmails)
+
                       const newEmails = displayedEmails.filter(
                         (firendEmail) => firendEmail !== email && !existingEmails.includes(firendEmail)
                       );
+
+                      console.log(newEmails)
 
                       const updatedFriends = [
                         ...friends,
