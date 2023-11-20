@@ -24,9 +24,9 @@ const ActivityPage = () => {
     const emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if (!email.match(emailFormat)) {
       alert("Email is not in a valid format.");
-    } else if (newPassword.length < 8) {
+    } else if (newPassword && newPassword.length < 8) {
       alert("Password should be at least 8 characters long.");
-    } else if (newPassword !== confirmPassword) {
+    } else if (newPassword && (newPassword !== confirmPassword)) {
       alert("Password and Confirm Password do not match.");
     } else {
       // Valid email format, password, and matching confirm password, proceed with update

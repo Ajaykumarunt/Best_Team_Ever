@@ -1,8 +1,10 @@
-import { React } from "react";
+import { React, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 import UserImage from "../member1.png";
 
 const SideNavigation = () => {
+  const {currentUser} = useContext(AuthContext)
   return (
     <div className="bg-bg-black h-screen flex flex-col">
       <div className="account-info h-1/3 flex flex-col justify-center items-center">
@@ -20,7 +22,7 @@ const SideNavigation = () => {
         <div className="user-avatar w-20 h-20 bg-smokewhite rounded-full"></div>
         </Link> */}
         <div>
-          <h1 className="text-smokewhite mt-4 text-2xl">Hello, Username</h1>
+          <h1 className="text-smokewhite mt-4 text-2xl">Hello, {currentUser.first_name + ' '+ currentUser.last_name}</h1>
         </div>
       </div>
       <div className="flex flex-col gap-12 justify-start pt-16 pl-20 h-2/3">

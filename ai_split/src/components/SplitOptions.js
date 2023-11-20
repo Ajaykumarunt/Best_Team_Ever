@@ -11,13 +11,13 @@ const SplitOptions = () => {
 
       <div className="bg-smokewhite w-3/4 flex justify-center items-center">
         <div className="flex flex-col gap-6 w-2/4 h-72 rounded-lg justify-center items-center">
-          <Link>
+          <Link to='/add_split'>
             <button className="bg-white w-72 h-24 rounded-lg p-2 drop-shadow-sm">
               Add Manually
             </button>
           </Link>
 
-          <Link>
+          <Link to='/add_split/invoice'>
             <button className="bg-white w-72 h-24 rounded-lg p-2 drop-shadow-sm">
               Scan Invoice
             </button>

@@ -53,7 +53,7 @@ function Groups() {
       </div>
       <div className="w-3/4 px-16 py-12 bg-smokewhite">
         <div>
-          <div className="flex justify-between items-center mb-16">
+          <div className="flex justify-between items-center mb-12">
             <h2 className="text-5xl font-bold">Groups</h2>
             <Link to="/creategroup">
               <button className="bg-light-green text-bg-black py-3 px-6 rounded">
@@ -63,9 +63,9 @@ function Groups() {
           </div>
         </div>
 
-        <div className="p-6 overflow-scroll h-3/5">
+        <div className="p-6 overflow-scroll h-1/2">
           {userGroups.length > 0 ? (
-            <div className="p-2 overflow-y-scroll">
+            <div className="p-2">
                 {userGroups.map((groupName) => (
                   <div key={groupName} className="mb-4 p-6 bg-white">
                     <span className="font-medium text-2xl">{groupName}</span>

@@ -53,9 +53,9 @@ const Activity = () => {
         <SideNavigation />
       </div>
       <div className="w-3/4 bg-smokewhite px-16 py-12">
-        <h1 className="text-5xl font-bold mb-12">Activity</h1>
+        <h1 className="text-5xl font-bold mb-8">Activity</h1>
 
-        <div className="h-5/6">
+        <div className="h-2/3">
           <div className="bg-smokewhite px-10 py-6 rounded-lg mt-8 h-90 w-full overflow-scroll">
             {loading ? (
               <p className="flex justify-center items-center h-full">
@@ -66,11 +66,11 @@ const Activity = () => {
                 No Activity to display
               </p>
             ) : (
-              activity.map((ele) =>
+              activity.slice().reverse().map((ele) =>
                 ele.type === "group" ? (
                   <GroupActivityContent payload={ele.payload} />
                 ) : (
-                  <SplitActivityContent />
+                  <SplitActivityContent payload={ele.payload}/>
                 )
               )
             )}

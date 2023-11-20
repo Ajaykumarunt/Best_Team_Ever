@@ -12,7 +12,6 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import useUserByEmail from "../customhooks/useUserByEmail";
 
 const MemberHome = () => {
   const [friendNames, setFriendNames] = useState([]);
@@ -42,21 +41,25 @@ const MemberHome = () => {
           const userData = userSnapshot.data();
           if (userData && userData.friends) {
             const friendEmails = userData.friends.map((friend) => friend.email);
-            let friendNames = [];
-            friendEmails.forEach(async (email) => {
-              const usersRef = collection(db, "users");
-              getDocs(query(usersRef, where("email", "==", email))).then(
-                (querySnapshot) => {
-                  if (!querySnapshot.empty) {
-                    querySnapshot.forEach((doc) => {
-                      const userDocData = doc.data();
-                      const friendName = userDocData.first_name + ' ' + userDocData.last_name;
-                      setFriendNames([...friendNames, friendName])
-                    });     
-                  }
+            console.log(friendEmails)
+            let names = [];
+            names = await Promise.all(
+              friendEmails.map(async (email) => {
+                const usersRef = collection(db, "users");
+                const querySnapshot = await getDocs(query(usersRef, where("email", "==", email)));
+            
+                if (!querySnapshot.empty) {
+                  return querySnapshot.docs.map((doc) => {
+                    const userDocData = doc.data();
+                    return userDocData.first_name + " " + userDocData.last_name;
+                  });
                 }
-              );
-            });
+
+                return [];
+              })
+            );
+            console.log(names)
+            setFriendNames(names)
 
             let balances = [];
             for (let i = 0; i < userData.friends.length; i++) {
@@ -78,9 +81,10 @@ const MemberHome = () => {
 
     fetchFriendNames();
   }, []);
+  console.log(friendNames);
 
   return (
-    <div className="bg-white px-10 py-6 rounded-lg mt-12 h-5/6 w-full overflow-scroll">
+    <div className="bg-white px-10 py-6 rounded-lg mt-12 h-90 w-full overflow-scroll">
       {loading ? (
         <p>Loading...</p>
       ) : friendNames.length === 0 ? (
@@ -91,16 +95,19 @@ const MemberHome = () => {
         friendNames.map((name, index) => (
           <div
             key={name}
-            className="flex justify-between p-2 mt-2 border-b last:border-0 w-full"
+            className="flex justify-between items-center p-2 mt-2 border-b last:border-0 w-full"
           >
-            <span>{name}</span>
-            <span
-              className={`font-medium ${
-                friendBalance[index] < 0 ? "text-red" : "text-dark-green"
-              }`}
-            >
-              {friendBalance[index]}
-            </span>
+            <span className="text-xl font-semibold">{name}</span>
+            <div className="flex flex-col items-center">
+              <p className="text-sm">{friendBalance[index] < 0 ? "you owe" : "you get"}</p>
+              <span
+                className={`font-medium text-xl ${
+                  friendBalance[index] < 0 ? "text-red" : "text-dark-green"
+                }`}
+              >
+                $ {friendBalance[index]}
+              </span>
+            </div>
           </div>
         ))
       )}

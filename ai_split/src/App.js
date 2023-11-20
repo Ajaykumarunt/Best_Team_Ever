@@ -10,6 +10,7 @@ import Activity from "./components/Activity";
 import AccountPage from "./components/AccountPage";
 import SplitOptions from "./components/SplitOptions";
 import CreateGroup from "./components/CreateGroup";
+import ManualSplit from "./components/ManualSplit";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -70,6 +71,14 @@ function App() {
       element={
         <ProtectRoute>
           <SplitOptions />
+        </ProtectRoute>
+      }
+    />
+    <Route
+      path="/add_split"
+      element={
+        <ProtectRoute>
+          <ManualSplit />
         </ProtectRoute>
       }
     />
