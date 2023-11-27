@@ -7,8 +7,6 @@ function BalamceHome({ amount }) {
   const {currentUser} = useContext(AuthContext)
   const [totalBalance, setTotalBalance] = useState(0)
 
-  
-
   useEffect(() => {
    const getTotalBalance = () =>{
     let balance = 0
