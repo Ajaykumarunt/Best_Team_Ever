@@ -11,6 +11,7 @@ import AccountPage from "./components/AccountPage";
 import SplitOptions from "./components/SplitOptions";
 import CreateGroup from "./components/CreateGroup";
 import ManualSplit from "./components/ManualSplit";
+import ScanInvoice from "./components/ScanInvoice";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -66,19 +67,11 @@ function App() {
           </ProtectRoute>
         }
       />
-      <Route
-      path="/split_options"
-      element={
-        <ProtectRoute>
-          <SplitOptions />
-        </ProtectRoute>
-      }
-    />
     <Route
       path="/add_split"
       element={
         <ProtectRoute>
-          <ManualSplit />
+          <ScanInvoice />
         </ProtectRoute>
       }
     />
