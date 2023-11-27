@@ -7,8 +7,6 @@ function BalamceHome({ amount }) {
   const {currentUser} = useContext(AuthContext)
   const [totalBalance, setTotalBalance] = useState(0)
 
-  
-
   useEffect(() => {
    const getTotalBalance = () =>{
     let balance = 0
@@ -28,7 +26,7 @@ function BalamceHome({ amount }) {
         <p>{totalBalance > 0?'you get back':'you owe'}</p>
         <p className={`font-semibold text-2xl ${totalBalance >= 0?'text-dark-green':'text-red'}`}>$ {totalBalance.toFixed(2)}</p>
       </div>
-      <Link to="/split_options">
+      <Link to="/add_split">
         <div className="butt">
           <button
             className="bg-white p-4 w-32 flex flex-col items-center rounded-lg"

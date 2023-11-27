@@ -81,7 +81,6 @@ const MemberHome = () => {
 
     fetchFriendNames();
   }, []);
-  console.log(friendNames);
 
   return (
     <div className="bg-white px-10 py-6 rounded-lg mt-12 h-90 w-full overflow-scroll">
