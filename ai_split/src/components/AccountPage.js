@@ -3,7 +3,16 @@ import { AuthContext } from "../contexts/AuthContext";
 import SideNavigation from "./SideNavigation";
 import { handleLogout, handleDeleteAccountMain } from "./FireBaseFunc";
 import { auth, db } from "../firebase";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { IoClose } from "react-icons/io5";
+import { IoImageOutline } from "react-icons/io5";
 
 const ActivityPage = () => {
   const { currentUser, setcurrentUser, currentUserId } =
@@ -13,24 +22,66 @@ const ActivityPage = () => {
   const [email, setEmail] = useState(currentUser.email);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImageUrl, setProfileImageUrl] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const history = useNavigate();
 
-  const handleImageUpload = (e) => {
-    // Handle image upload logic here
+  console.log(currentUser);
+
+  const handleImageUpload = (event) => {
+    const image = event.target.files[0];
+
+    if (!image) {
+      return;
+    }
+
+    setUploading(true);
+
+    const storage = getStorage();
+    const storageRef = ref(storage, `images/${image.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Upload progress: ${progress}%`);
+      },
+      (error) => {
+        console.error(error.message);
+        setUploading(false);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+          setProfileImageUrl(downloadURL);
+        });
+      }
+    );
+  };
+console.log(profileImageUrl)
+  const deleteModalHandle = () => {
+    setShowDeleteModal(!showDeleteModal);
   };
 
-  const handleUpdateProfile = () => {
+  const handleUpdateProfile = async () => {
     const emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if (!email.match(emailFormat)) {
       alert("Email is not in a valid format.");
     } else if (newPassword && newPassword.length < 8) {
       alert("Password should be at least 8 characters long.");
-    } else if (newPassword && (newPassword !== confirmPassword)) {
+    } else if (newPassword && newPassword !== confirmPassword) {
       alert("Password and Confirm Password do not match.");
     } else {
-      // Valid email format, password, and matching confirm password, proceed with update
-      // You can add your profile update logic here
+      const currentUserRef = doc(db, "users", currentUserId);
+      await updateDoc(currentUserRef, {
+        first_name: FirstName,
+        last_name: LastName,
+        email: email,
+        profile_img_url: profileImageUrl,
+      });
     }
   };
 
@@ -40,19 +91,18 @@ const ActivityPage = () => {
   };
 
   const handleDeleteAccount = async () => {
-    // Handle delete account logic here
     try {
-      if (window.confirm("Do you want to delete your account?")) {
-        //console.log(db);
-        handleDeleteAccountMain(db, currentUserId, setcurrentUser, history);
-        //handleLogoutClick();
-        //} else {
-        //console.log(currentUserId);
+      const user = auth.currentUser;
+
+      if (currentUser.total_balance > 0) {
+        console.log("Cannot delete account. User has a positive balance.");
       } else {
-        console.log("Delete Abort");
+        await user.delete();
+        await deleteDoc(doc(db, "users", user.uid));
+        setShowDeleteModal(false);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error("Error deleting account:", error.message);
     }
   };
 
@@ -75,7 +125,7 @@ const ActivityPage = () => {
             <button
               className="bg-red text-white p-3 rounded-lg text-lg hover:bg-rose-600"
               type="button"
-              onClick={handleDeleteAccount}
+              onClick={deleteModalHandle}
             >
               Delete Account
             </button>
@@ -162,14 +212,15 @@ const ActivityPage = () => {
           <div className="flex justify-center image-upload-section rounded-lg mt-12">
             <div className="relative justify-center">
               <label htmlFor="profile-image" className="cursor-pointer block">
-                <div className="bg-gray-200 rounded-full p-4 w-16 h-16 flex items-center justify-center transition-transform transform hover:scale-110">
+                <div className="bg-white p-4 w-64 h-32 flex flex-col items-center justify-center rounded-lg">
                   <span
                     role="img"
                     aria-label="Upload Image"
                     className="text-6xl justify-center items-center"
                   >
-                    📷
+                    <IoImageOutline />
                   </span>
+                  <p>Upload profile image</p>
                 </div>
               </label>
               <input
@@ -190,6 +241,43 @@ const ActivityPage = () => {
             </button>
           </div>
         </div>
+        {showDeleteModal && (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              {currentUser.total_balance > 0 ? (
+                <>
+                  <div className="flex justify-end pr-2 pl-2 pb-2">
+                    <IoClose className="text-xl" onClick={deleteModalHandle} />
+                  </div>
+                  <p className="mb-4 text-red-500">
+                    You cannot delete your account because you have a positive
+                    balance.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="mb-4">
+                    Are you sure you want to delete your account?
+                  </p>
+                  <div className="flex justify-between">
+                    <button
+                      onClick={handleDeleteAccount}
+                      className="bg-red text-white px-4 py-2 rounded"
+                    >
+                      Delete Account
+                    </button>
+                    <button
+                      onClick={deleteModalHandle}
+                      className="bg-bg-black text-smokewhite px-4 py-2 rounded"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

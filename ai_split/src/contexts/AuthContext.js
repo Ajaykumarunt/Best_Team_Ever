@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         const unsubscribeSnapshot = onSnapshot(doc(db, "users", user.uid), (doc) => {
           setcurrentUser(doc.data());
+          setcurrentUserId(user.uid)
         });
         return () => unsubscribeSnapshot();
       } else {
