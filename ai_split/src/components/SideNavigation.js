@@ -12,7 +12,7 @@ const SideNavigation = () => {
       <div className="account-info h-1/3 flex flex-col justify-center items-center">
         <Link to="/account">
           {currentUser.profile_img_url?(
-            <img src={currentUser.profile_img_url} alt="User Profile Image" className="w-24 w-24 rounded-full cursor-pointer" />
+            <img src={currentUser.profile_img_url} alt="User Profile Image" className="w-24 h-24 rounded-full cursor-pointer" />
           ):(
             <Avatar className="w-24 h-24 cursor-pointer" {...config} />
           )

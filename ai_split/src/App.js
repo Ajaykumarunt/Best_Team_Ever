@@ -12,6 +12,7 @@ import SplitOptions from "./components/SplitOptions";
 import CreateGroup from "./components/CreateGroup";
 import ManualSplit from "./components/ManualSplit";
 import ScanInvoice from "./components/ScanInvoice";
+import GroupInfo from "./components/GroupInfo";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -40,6 +41,14 @@ function App() {
         element={
           <ProtectRoute>
             <Groups />
+          </ProtectRoute>
+        }
+      />
+      <Route
+        path="/group/:id"
+        element={
+          <ProtectRoute>
+            <GroupInfo />
           </ProtectRoute>
         }
       />

@@ -13,7 +13,7 @@ function Groups() {
   useEffect(() => {
     const fetchGroups = async () => {
       const userDoc = doc(db, "users", currentUserId);
-      let groupNames = []
+      let groupNames = [];
 
       if (!userDoc) {
         console.error("User document not found");
@@ -25,16 +25,20 @@ function Groups() {
         const userData = userSnapshot.data();
         if (userData && userData.groups) {
           const groupIds = userData.groups.ids;
-          console.log(groupIds)
-          
-          const groupFetchPromises = groupIds.map(async id => {
+
+          const groupFetchPromises = groupIds.map(async (id) => {
             const groupDocRef = doc(db, "groups", id);
             const groupDocSnap = await getDoc(groupDocRef);
             return groupDocSnap.data().groupName;
           });
-  
+
           const groupNames = await Promise.all(groupFetchPromises);
-          setUserGroups(groupNames);
+
+          const groups = groupIds.map((groupId, index) => ({
+            groupId: groupId,
+            groupName: groupNames[index],
+          }));
+          setUserGroups(groups);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -44,7 +48,7 @@ function Groups() {
     fetchGroups();
   }, []);
 
-  console.log(userGroups)
+  console.log(userGroups);
 
   return (
     <div className="flex">
@@ -66,11 +70,13 @@ function Groups() {
         <div className="p-6 overflow-scroll h-1/2">
           {userGroups.length > 0 ? (
             <div className="p-2">
-                {userGroups.map((groupName) => (
-                  <div key={groupName} className="mb-4 p-6 bg-white">
-                    <span className="font-medium text-2xl">{groupName}</span>
+              {userGroups.map((group) => (
+                <Link to={`/group/${group.groupId}`}>
+                  <div key={group.groupId} className="mb-4 p-6 bg-white">
+                    <span className="font-medium text-2xl">{group.groupName}</span>
                   </div>
-                ))}
+                </Link>
+              ))}
             </div>
           ) : (
             <p className="text-xl font-bold mb-4 text-red-500">
