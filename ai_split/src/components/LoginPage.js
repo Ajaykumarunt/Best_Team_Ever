@@ -45,30 +45,38 @@ const LoginPage = () => {
     <div className="bg-bg-black h-screen">
       {error && <ErrorPopup message={error} />}
       <div className="logo pt-12 flex justify-center items-center">
-        <img src={logo} alt="logo"></img>
+        <img src={logo} alt="logo" />
       </div>
       <div className="form flex justify-center items-center mt-16">
         <div className="bg-smokewhite w-96 rounded-md">
           <div className="form-body p-8">
             <form className="flex flex-col">
-              <input
-                className="p-2 border-2 border-black rounded-md mb-4"
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
-                required
-              />
-              <input
-                className="p-2 border-2 border-black rounded-md mb-4"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                required
-              />
+              <label htmlFor="email" className="flex flex-col gap-1">
+                Email
+                <input
+                  className="p-2 border-2 border-black rounded-md mb-4"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
+                  required
+                />
+              </label>
+              <label htmlFor="password" className="flex flex-col gap-1">
+                Password
+                <input
+                  className="p-2 border-2 border-black rounded-md mb-4"
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                  required
+                />
+              </label>
               <button
                 disabled={loading}
                 className="bg-light-green p-2 rounded-md disabled:bg-gray-400"
@@ -81,7 +89,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-
+  
       <div className="flex justify-center items-center mt-16">
         <Link className="text-smokewhite" to="/signup">
           Register Account
@@ -89,6 +97,7 @@ const LoginPage = () => {
       </div>
     </div>
   );
+  
 };
 
 export default LoginPage;

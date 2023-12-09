@@ -10,7 +10,7 @@ const SideNavigation = () => {
   return (
     <div className="bg-bg-black h-screen flex flex-col">
       <div className="account-info h-1/3 flex flex-col justify-center items-center">
-        <Link to="/account">
+        <Link to="/account" aria-label="User Avatar">
           {currentUser.profile_img_url?(
             <img src={currentUser.profile_img_url} alt="User Profile Image" className="w-24 h-24 rounded-full cursor-pointer" />
           ):(

@@ -23,7 +23,7 @@ const SignupPage = () => {
       return (
         <button
           type="submit"
-          className="bg-light-green p-2 rounded-md"
+          className="bg-light-green p-2 rounded-md mt-2"
           disabled={loading}
           onClick={handleSignup}
         >
@@ -34,7 +34,7 @@ const SignupPage = () => {
       return (
         <button
           type="submit"
-          className="bg-light-green p-2 rounded-md disabled:bg-gray-400"
+          className="bg-light-green p-2 rounded-md disabled:bg-gray-400 mt-2"
           disabled={true || loading}
           onClick={handleSignup}
         >
@@ -83,7 +83,7 @@ const SignupPage = () => {
       },
       friends: [],
       activity: [],
-      total_balance: 0.00
+      total_balance: 0.0,
     };
 
     console.log(usrdata);
@@ -110,57 +110,72 @@ const SignupPage = () => {
     <div className="bg-bg-black h-screen">
       {error && <ErrorPopup message={error} />}
       <div className="logo pt-12 flex justify-center items-center">
-        <img src={logo} alt="logo"></img>
+        <img src={logo} alt="logo" />
       </div>
       <div className="form flex justify-center items-center mt-16">
         <div className="bg-smokewhite w-96 rounded-md">
           <div className="form-body p-8">
             <form className="flex flex-col">
-              <input
-                className="p-2 border-2 border-black rounded-md mb-4"
-                type="text"
-                name="first_name"
-                placeholder="First Name"
-                value={firstname}
-                onChange={(e) => setfirstname(e.target.value)}
-                required
-              />
-              <input
-                className="p-2 border-2 border-black rounded-md mb-4"
-                type="text"
-                name="last_name"
-                placeholder="Last Name"
-                value={lastname}
-                onChange={(e) => setlastname(e.target.value)}
-                required
-              />
-              <input
-                className="p-2 border-2 border-black rounded-md mb-4"
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
-                required
-              />
-              <input
-                className="p-2 border-2 border-black rounded-md mb-4"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                required
-              />
-              <input
-                className="p-2 border-2 border-black rounded-md mb-4"
-                type="password"
-                name="confirm_password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setconfirmPassword(e.target.value)}
-                required
-              />
+              <label className="flex flex-col gap-1 mb-2">
+                First Name
+                <input
+                  className="p-2 border-2 border-black rounded-md"
+                  type="text"
+                  name="first_name"
+                  placeholder="First Name"
+                  value={firstname}
+                  onChange={(e) => setfirstname(e.target.value)}
+                  required
+                />
+              </label>
+              <label className="flex flex-col gap-1 mb-2">
+                Last Name
+                <input
+                  className="p-2 border-2 border-black rounded-md"
+                  type="text"
+                  name="last_name"
+                  placeholder="Last Name"
+                  value={lastname}
+                  onChange={(e) => setlastname(e.target.value)}
+                  required
+                />
+              </label>
+              <label className="flex flex-col gap-1 mb-2">
+                Email
+                <input
+                  className="p-2 border-2 border-black rounded-md"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
+                  required
+                />
+              </label>
+              <label className="flex flex-col gap-1 mb-2">
+                Password
+                <input
+                  className="p-2 border-2 border-black rounded-md"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                  required
+                />
+              </label>
+              <label className="flex flex-col gap-1 mb-2">
+                Confirm Password
+                <input
+                  className="p-2 border-2 border-black rounded-md"
+                  type="password"
+                  name="confirm_password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setconfirmPassword(e.target.value)}
+                  required
+                />
+              </label>
               <SubmitButton />
             </form>
           </div>

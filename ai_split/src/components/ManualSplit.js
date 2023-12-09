@@ -354,7 +354,7 @@ const ManualSplit = () => {
           {showNextForm ? (
             <div className="w-full h-screen">
               <div className="back_button w-full flex justify-between items-center mb-4">
-                <button className="text-3xl" onClick={handleBackButtonClick}>
+                <button className="text-3xl" aria-label={"back button"} onClick={handleBackButtonClick}>
                   <IoArrowBack />
                 </button>
                 <div className="flex gap-6">
@@ -385,17 +385,19 @@ const ManualSplit = () => {
                       <div className="flex items-center gap-4">
                         <button
                           className="text-2xl"
+                          ariaLabel="Expand/Collapse"
                           onClick={() => handleExpandClick(index)}
                         >
                           {product.expanded ? (
                             <IoIosArrowDropup />
                           ) : (
-                            <IoIosArrowDropdown />
+                            <IoIosArrowDropdown/>
                           )}
                         </button>
 
                         <button
                           className="text-2xl product_edit_btn"
+                          aria-label="Edit Product"
                           onClick={() => handleEditButtonClick(index)}
                         >
                           <FaRegEdit />
@@ -403,6 +405,8 @@ const ManualSplit = () => {
 
                         <button
                           className="text-2xl product_delete_btn"
+                          aria-label={"Delete product"}
+                          value="delete product"
                           onClick={() => handleDeleteButtonClick(index)}
                         >
                           <IoTrashOutline />
@@ -538,6 +542,7 @@ const ManualSplit = () => {
                   <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button
                       type="button"
+                      aria-label="Edit Product"
                       onClick={handleDoneButtonClick}
                       className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-light-green text-base font-medium text-bg-black hover:bg-light-green-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-green-dark sm:ml-3 sm:w-auto sm:text-sm"
                     >
@@ -597,6 +602,7 @@ const ManualSplit = () => {
                   <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button
                       type="button"
+                      aria-label="Edit Product"
                       onClick={handleEditProduct}
                       className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-light-green text-base font-medium text-bg-black hover:bg-light-green-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-green-dark sm:ml-3 sm:w-auto sm:text-sm"
                     >
@@ -604,6 +610,7 @@ const ManualSplit = () => {
                     </button>
                     <button
                       type="button"
+                      aria-label="Cancel button"
                       onClick={handleModalClose}
                       className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-green-dark sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                     >
