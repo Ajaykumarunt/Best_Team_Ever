@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Best_Team_Ever/static/css/main.ba7fbbf3.css",
-    "main.js": "/Best_Team_Ever/static/js/main.6e5c5815.js",
+    "main.css": "/Best_Team_Ever/static/css/main.cc844cc1.css",
+    "main.js": "/Best_Team_Ever/static/js/main.f9aea5e6.js",
     "static/js/787.485a23bb.chunk.js": "/Best_Team_Ever/static/js/787.485a23bb.chunk.js",
     "static/media/member2.png": "/Best_Team_Ever/static/media/member2.95d1ffd470bd653fc265.png",
     "static/media/person-icon.jpg": "/Best_Team_Ever/static/media/person-icon.8774ba36754824a0e43d.jpg",
@@ -9,12 +9,12 @@
     "static/media/member3.png": "/Best_Team_Ever/static/media/member3.59a3389f7568184769b5.png",
     "static/media/user_avatar.png": "/Best_Team_Ever/static/media/user_avatar.27ffb2ca38534522ea7a.png",
     "index.html": "/Best_Team_Ever/index.html",
-    "main.ba7fbbf3.css.map": "/Best_Team_Ever/static/css/main.ba7fbbf3.css.map",
-    "main.6e5c5815.js.map": "/Best_Team_Ever/static/js/main.6e5c5815.js.map",
+    "main.cc844cc1.css.map": "/Best_Team_Ever/static/css/main.cc844cc1.css.map",
+    "main.f9aea5e6.js.map": "/Best_Team_Ever/static/js/main.f9aea5e6.js.map",
     "787.485a23bb.chunk.js.map": "/Best_Team_Ever/static/js/787.485a23bb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba7fbbf3.css",
-    "static/js/main.6e5c5815.js"
+    "static/css/main.cc844cc1.css",
+    "static/js/main.f9aea5e6.js"
   ]
 }
